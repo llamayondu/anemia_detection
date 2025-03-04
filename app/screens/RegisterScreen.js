@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Background from "../components/Background";
 import Logo from "../components/Logo";
@@ -18,7 +19,8 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
-  const onSignUpPressed = () => {
+  const onSignUpPressed = async () => {
+    console.log("SignUp button pressed");
     const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
@@ -26,12 +28,32 @@ export default function RegisterScreen({ navigation }) {
       setName({ ...name, error: nameError });
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
+      console.log("Validation errors:", { nameError, emailError, passwordError });
       return;
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "HomeScreen" }],
-    });
+    try {
+      console.log("Sending registration request");
+      const response = await fetch("http://10.0.2.2:3000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          password: password.value,
+        }),
+      });
+      const data = await response.json();
+      console.log("Response received:", data);
+      if (data.success && data.token) {
+        await AsyncStorage.setItem("token", data.token);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "HomeScreen" }],
+        });
+      }
+    } catch (err) {
+      console.log("Error during registration:", err);
+    }
   };
 
   return (
