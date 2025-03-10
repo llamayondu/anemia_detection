@@ -10,10 +10,9 @@ export default function StartScreen({ navigation }) {
   return (
     <Background>
       <Logo />
-      <Header>Welcome to Exlogrn</Header>
+      <Header>Anemia Detection App</Header>
       <Paragraph>
-        A starter app template for React Native Expo, featuring a ready-to-use
-        login screen.
+        Quick Anemia Check - Get Your Results Instantly, No Doctor Visit Needed!
       </Paragraph>
       <Button
         mode="contained"

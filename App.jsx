@@ -11,6 +11,8 @@ import {
   ResetPasswordScreen,
   HomeScreen,
 } from "./app/screens";
+import UploadScreen from "./app/screens/UploadScreen";
+import DisplayImageScreen from "./app/screens/DisplayImageScreen";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +34,8 @@ export default function App() {
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}
           />
+          <Stack.Screen name="UploadScreen" component={UploadScreen} />
+          <Stack.Screen name="DisplayImageScreen" component={DisplayImageScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
