@@ -13,6 +13,7 @@ import {
 } from "./app/screens";
 import UploadScreen from "./app/screens/UploadScreen";
 import DisplayImageScreen from "./app/screens/DisplayImageScreen";
+import ResultsScreen from "./app/screens/ResultsScreen";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ export default function App() {
             component={ResetPasswordScreen}
           />
           <Stack.Screen name="UploadScreen" component={UploadScreen} />
+          <Stack.Screen name="ResultsScreen" component={ResultsScreen} />
           <Stack.Screen name="DisplayImageScreen" component={DisplayImageScreen} />
         </Stack.Navigator>
       </NavigationContainer>

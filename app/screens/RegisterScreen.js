@@ -48,7 +48,7 @@ export default function RegisterScreen({ navigation }) {
         await AsyncStorage.setItem("token", data.token);
         navigation.reset({
           index: 0,
-          routes: [{ name: "HomeScreen" }],
+          routes: [{ name: "UploadScreen" }],
         });
       }
     } catch (err) {
